@@ -64,16 +64,16 @@ void CreateBiTree()
 			newnode->lchild = NULL;
 			newnode->rchild = NULL;
 
-			if (start) { //¸ù½Úµã
+			if (start) { //æ ¹èŠ‚ç‚¹
 				root = newnode;
 				start = false;
 			}
 			else {
-				if (lastpop) {  //Èç¹ûÉÏÒ»¸öÃüÁîÊÇpop£¬ÔòÕâ¸ö½ÚµãÊÇpop³öÀ´µÄ½ÚµãµÄÓÒº¢×Ó
+				if (lastpop) {  //å¦‚æžœä¸Šä¸€ä¸ªå‘½ä»¤æ˜¯popï¼Œåˆ™è¿™ä¸ªèŠ‚ç‚¹æ˜¯popå‡ºæ¥çš„èŠ‚ç‚¹çš„å³å­©å­
 					lastpop->rchild = newnode;
 					lastpop = NULL;
 				}
-				else  //Èç¹ûÉÏ¸öÃüÁîÊÇpush£¬ÔòÕâ¸ö½ÚµãÊÇpush½ÚµãµÄ×óº¢×Ó
+				else  //å¦‚æžœä¸Šä¸ªå‘½ä»¤æ˜¯pushï¼Œåˆ™è¿™ä¸ªèŠ‚ç‚¹æ˜¯pushèŠ‚ç‚¹çš„å·¦å­©å­
 					stk.top()->lchild = newnode;
 			}
 			stk.push(newnode);
@@ -84,7 +84,7 @@ void CreateBiTree()
 		} //end of if pop
 	}
 	//cout << root->data << " " << lastpop->data << endl;
-	//ºóÐò±éÀú
+	//åŽåºéåŽ†
 	postorder(root, print);
 }
 
