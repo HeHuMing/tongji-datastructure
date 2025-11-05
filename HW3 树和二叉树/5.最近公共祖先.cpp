@@ -9,7 +9,7 @@ int main()
 		int Ni, Mi;
 		cin >> Ni >> Mi;
 
-		vector<int> parent(Ni + 1, 0); //¼ÇÂ¼Ã¿¸öµãµÄ¸¸½Úµã£¬ÏÂ±êÎªµ±Ç°µã£¬ÊıÖµÎª¸¸½Úµã
+		vector<int> parent(Ni + 1, 0); //è®°å½•æ¯ä¸ªç‚¹çš„çˆ¶èŠ‚ç‚¹ï¼Œä¸‹æ ‡ä¸ºå½“å‰ç‚¹ï¼Œæ•°å€¼ä¸ºçˆ¶èŠ‚ç‚¹
 		for (int i = 0; i < Ni - 1; i++) {
 			int a, b;
 			cin >> a >> b;
@@ -18,8 +18,8 @@ int main()
 
 		for (int k = 0; k < Mi; k++) {
 			int qa, qb;
-			cin >> qa >> qb;  //Á½¸ö²éÑ¯½Úµã
-			vector<int> qa_path, qb_path; //¼ÇÂ¼²éÑ¯½Úµãµ½¸ù½ÚµãÂ·¾¶ÉÏ¾­¹ıµÄ½Úµã
+			cin >> qa >> qb;  //ä¸¤ä¸ªæŸ¥è¯¢èŠ‚ç‚¹
+			vector<int> qa_path, qb_path; //è®°å½•æŸ¥è¯¢èŠ‚ç‚¹åˆ°æ ¹èŠ‚ç‚¹è·¯å¾„ä¸Šç»è¿‡çš„èŠ‚ç‚¹
 			qa_path.push_back(qa);
 			while (1) {
 				int father = parent[qa];
@@ -41,7 +41,7 @@ int main()
 				}
 			}
 
-			//±È½ÏÕÒµ½Á½ÌõÂ·¾¶ÖĞµÚÒ»¸öÏàÍ¬µÄ½Úµã
+			//æ¯”è¾ƒæ‰¾åˆ°ä¸¤æ¡è·¯å¾„ä¸­ç¬¬ä¸€ä¸ªç›¸åŒçš„èŠ‚ç‚¹
 			int flag = 0;
 			int ans = 0;
 			for (int i = 0; i < qa_path.size(); i++) {
