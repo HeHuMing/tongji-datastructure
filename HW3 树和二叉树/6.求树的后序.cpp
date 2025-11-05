@@ -22,7 +22,7 @@ BiTree createBiTree(string preorder, string inorder, bool& success)
 	root->lchild = NULL;
 	root->rchild = NULL;
 
-	//ÔÚÖÐÐòÖÐÕÒµ½¸ù½ÚµãµÄÎ»ÖÃ
+	//åœ¨ä¸­åºä¸­æ‰¾åˆ°æ ¹èŠ‚ç‚¹çš„ä½ç½®
 	auto it = inorder.find(root->data);
 	if (it == string::npos) {
 		success = false;
@@ -30,15 +30,15 @@ BiTree createBiTree(string preorder, string inorder, bool& success)
 		return nullptr;
 	}
 
-	//×ó×ÓÊ÷µÄÖÐÐòºÍÇ°Ðò
+	//å·¦å­æ ‘çš„ä¸­åºå’Œå‰åº
 	string left_inorder = inorder.substr(0, it);
 	string left_preorder = preorder.substr(1, left_inorder.size());
 
-	//ÓÒ×ÓÊ÷µÄÖÐÐòºÍÇ°Ðò
+	//å³å­æ ‘çš„ä¸­åºå’Œå‰åº
 	string right_inorder = inorder.substr(it + 1);
 	string right_preorder = preorder.substr(left_inorder.size() + 1);
 
-	//µÝ¹é¹¹½¨×ó×ÓÊ÷¡¢ÓÒ×ÓÊ÷
+	//é€’å½’æž„å»ºå·¦å­æ ‘ã€å³å­æ ‘
 	root->lchild = createBiTree(left_preorder, left_inorder, success);
 	if (!success) {
 		delete root;
@@ -70,7 +70,7 @@ bool postorder(BiTree T)
 		return true;
 }
 
-// ÊÍ·Å¶þ²æÊ÷ÄÚ´æ
+// é‡Šæ”¾äºŒå‰æ ‘å†…å­˜
 void deleteTree(BiTree root) {
 	if (root) {
 		deleteTree(root->lchild);
