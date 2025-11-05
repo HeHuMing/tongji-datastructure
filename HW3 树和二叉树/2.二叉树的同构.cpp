@@ -10,7 +10,7 @@ struct BiTNode {
 
 int n1, n2;
 
-//´´½¨¶ş²æÊ÷²¢ÇÒ·µ»Ø¸ù½ÚµãË÷Òı
+//åˆ›å»ºäºŒå‰æ ‘å¹¶ä¸”è¿”å›æ ¹èŠ‚ç‚¹ç´¢å¼•
 int CreateBiTree(vector<BiTNode>& tree, int n)
 {
 	vector<bool> hasparent(n, false);
@@ -29,34 +29,34 @@ int CreateBiTree(vector<BiTNode>& tree, int n)
 		}
 	}
 
-	//ÕÒ¸ù½Úµã
+	//æ‰¾æ ¹èŠ‚ç‚¹
 	for (int i = 0; i < n; i++)
 		if (!hasparent[i])
 			return i;
 	return -1;
 }
 
-//ÅĞ¶ÏÁ½¿ÃÊ÷ÊÇ·ñÍ¬¹¹
+//åˆ¤æ–­ä¸¤æ£µæ ‘æ˜¯å¦åŒæ„
 bool judge(vector<BiTNode>& tree1, int root1, vector<BiTNode>& tree2, int root2)
 {
-	//Á½¿Ã¿ÕÊ÷
+	//ä¸¤æ£µç©ºæ ‘
 	if (root1 == -1 && root2 == -1) return true;
-	//Ò»¿Ã¿ÕÒ»¿Ã²»¿Õ
+	//ä¸€æ£µç©ºä¸€æ£µä¸ç©º
 	if ((root1 == -1 && root2 != -1) || (root1 != -1 && root2 == -1)) return false;
-	//¸ù½ÚµãÊı¾İ²»Í¬
+	//æ ¹èŠ‚ç‚¹æ•°æ®ä¸åŒ
 	if (tree1[root1].data != tree2[root2].data) return false;
 
-	//Çé¿ö1£º×ó¶Ô×ó£¬ÓÒ¶ÔÓÒ
+	//æƒ…å†µ1ï¼šå·¦å¯¹å·¦ï¼Œå³å¯¹å³
 	bool case1 = judge(tree1, tree1[root1].lchild, tree2, tree2[root2].lchild)
 		&& judge(tree1, tree1[root1].rchild, tree2, tree2[root2].rchild);
-	//Çé¿ö2£º×ó¶ÔÓÒ£¬ÓÒ¶Ô×ó
+	//æƒ…å†µ2ï¼šå·¦å¯¹å³ï¼Œå³å¯¹å·¦
 	bool case2 = judge(tree1, tree1[root1].lchild, tree2, tree2[root2].rchild)
 		&& judge(tree1, tree1[root1].rchild, tree2, tree2[root2].lchild);
 
 	return case1 || case2;
 }
 
-//ÇóÊ÷µÄÉî¶È
+//æ±‚æ ‘çš„æ·±åº¦
 int getdepth(vector<BiTNode>& tree, int root)
 {
 	if (root == -1) return 0;
