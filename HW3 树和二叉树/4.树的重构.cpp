@@ -6,14 +6,14 @@ using namespace std;
 
 #define max_points 10000
 
-//ÓÃÓÚ¼ÇÂ¼³õÊ¼µÄÓĞĞòÊ÷
+//ç”¨äºè®°å½•åˆå§‹çš„æœ‰åºæ ‘
 typedef struct SqTNode {
 	int data;
 	int parent = -1;
-	vector<int> child; //¼ÇÂ¼Ã¿¸ö½ÚµãµÄËùÓĞº¢×Ó
+	vector<int> child; //è®°å½•æ¯ä¸ªèŠ‚ç‚¹çš„æ‰€æœ‰å­©å­
 }SqTNode;
 
-//ÓÃÓÚ¼ÇÂ¼ÖØ¹¹ºóµÄ¶ş²æÊ÷
+//ç”¨äºè®°å½•é‡æ„åçš„äºŒå‰æ ‘
 typedef struct BiTNode {
 	int data;
 	int lchild = -1, rchild = -1;
@@ -27,13 +27,13 @@ int getDepth(vector<BiTNode>& newnode)
 	int result = 0;
 
 	for (int i = 0; i < newnode.size(); i++) {
-		// ¼ÆËã×óº¢×ÓÉî¶È£¨Éî¶È+1£©
+		// è®¡ç®—å·¦å­©å­æ·±åº¦ï¼ˆæ·±åº¦+1ï¼‰
 		if (newnode[i].lchild != -1) {
 			depth[newnode[i].lchild] = depth[i] + 1;
 			result = max(result, depth[newnode[i].lchild]);
 		}
 
-		// ¼ÆËãÓÒº¢×ÓÉî¶È£¨Éî¶È+1£©
+		// è®¡ç®—å³å­©å­æ·±åº¦ï¼ˆæ·±åº¦+1ï¼‰
 		if (newnode[i].rchild != -1) {
 			depth[newnode[i].rchild] = depth[i] + 1;
 			result = max(result, depth[newnode[i].rchild]);
@@ -57,10 +57,10 @@ int main()
 		int depth1 = 0, depth2 = 0;
 		int sum1 = 0;
 
-		//¹¹Ôì³õÊ¼ÓĞĞòÊ÷£¬²¢ÇóÉî¶È£¨Ç°×ººÍ£©
+		//æ„é€ åˆå§‹æœ‰åºæ ‘ï¼Œå¹¶æ±‚æ·±åº¦ï¼ˆå‰ç¼€å’Œï¼‰
 		stack<int> stk;
-		int current_node = 0; //¼ÇÂ¼Â·¾¶ÉÏ×ß¹ıµÄÃ¿Ò»¸ö½Úµã
-		int current_index = 0; //¼ÇÂ¼µ±Ç°ÈëÕ»µÄ½Úµã±àºÅ
+		int current_node = 0; //è®°å½•è·¯å¾„ä¸Šèµ°è¿‡çš„æ¯ä¸€ä¸ªèŠ‚ç‚¹
+		int current_index = 0; //è®°å½•å½“å‰å…¥æ ˆçš„èŠ‚ç‚¹ç¼–å·
 		SqTNode node[max_points];
 		stk.push(current_index);
 		for (int i = 0; i < str.size(); i++) {
@@ -79,7 +79,7 @@ int main()
 			depth1 = max(depth1, sum1);
 		}
 
-		//ÖØ¹¹¶ş²æÊ÷
+		//é‡æ„äºŒå‰æ ‘
 		vector<BiTNode> newnode(current_index + 1);
 		for (int i = 0; i <= current_index; i++) {
 			newnode[i].data = i;
