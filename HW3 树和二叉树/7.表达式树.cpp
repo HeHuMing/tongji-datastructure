@@ -6,7 +6,7 @@
 #include <cmath>
 using namespace std;
 
-// Ê÷½Úµã½á¹¹
+// æ ‘èŠ‚ç‚¹ç»“æ„
 struct TreeNode {
     char val;
     TreeNode* left;
@@ -14,37 +14,37 @@ struct TreeNode {
     TreeNode(char x) : val(x), left(nullptr), right(nullptr) {}
 };
 
-// ÔËËã·ûÓÅÏÈ¼¶
+// è¿ç®—ç¬¦ä¼˜å…ˆçº§
 int precedence(char op) {
     if (op == '+' || op == '-') return 1;
     if (op == '*' || op == '/') return 2;
     return 0;
 }
 
-// ÖĞ×º×ªºó×º
+// ä¸­ç¼€è½¬åç¼€
 string infixToPostfix(const string& infix) {
     stack<char> st;
     string postfix;
 
     for (char c : infix) {
         if (isalpha(c)) {
-            // ²Ù×÷ÊıÖ±½ÓÊä³ö
+            // æ“ä½œæ•°ç›´æ¥è¾“å‡º
             postfix += c;
         }
         else if (c == '(') {
-            // ×óÀ¨ºÅÈëÕ»
+            // å·¦æ‹¬å·å…¥æ ˆ
             st.push(c);
         }
         else if (c == ')') {
-            // ÓÒÀ¨ºÅ£ºµ¯³öÖ±µ½Óöµ½×óÀ¨ºÅ
+            // å³æ‹¬å·ï¼šå¼¹å‡ºç›´åˆ°é‡åˆ°å·¦æ‹¬å·
             while (!st.empty() && st.top() != '(') {
                 postfix += st.top();
                 st.pop();
             }
-            st.pop(); // µ¯³ö×óÀ¨ºÅ
+            st.pop(); // å¼¹å‡ºå·¦æ‹¬å·
         }
         else {
-            // ÔËËã·û£ºµ¯³öÓÅÏÈ¼¶¸ü¸ß»òÏàµÈµÄÔËËã·û
+            // è¿ç®—ç¬¦ï¼šå¼¹å‡ºä¼˜å…ˆçº§æ›´é«˜æˆ–ç›¸ç­‰çš„è¿ç®—ç¬¦
             while (!st.empty() && precedence(st.top()) >= precedence(c)) {
                 postfix += st.top();
                 st.pop();
@@ -53,7 +53,7 @@ string infixToPostfix(const string& infix) {
         }
     }
 
-    // µ¯³öÕ»ÖĞÊ£ÓàÔËËã·û
+    // å¼¹å‡ºæ ˆä¸­å‰©ä½™è¿ç®—ç¬¦
     while (!st.empty()) {
         postfix += st.top();
         st.pop();
@@ -62,17 +62,17 @@ string infixToPostfix(const string& infix) {
     return postfix;
 }
 
-// ´Óºó×º±í´ïÊ½¹¹½¨±í´ïÊ½Ê÷
+// ä»åç¼€è¡¨è¾¾å¼æ„å»ºè¡¨è¾¾å¼æ ‘
 TreeNode* buildTree(const string& postfix) {
     stack<TreeNode*> st;
 
     for (char c : postfix) {
         if (isalpha(c)) {
-            // ²Ù×÷Êı£º´´½¨Ò¶×Ó½Úµã
+            // æ“ä½œæ•°ï¼šåˆ›å»ºå¶å­èŠ‚ç‚¹
             st.push(new TreeNode(c));
         }
         else {
-            // ÔËËã·û£º´´½¨¸ù½Úµã£¬µ¯³öÁ½¸ö²Ù×÷Êı×÷Îª×óÓÒ×ÓÊ÷
+            // è¿ç®—ç¬¦ï¼šåˆ›å»ºæ ¹èŠ‚ç‚¹ï¼Œå¼¹å‡ºä¸¤ä¸ªæ“ä½œæ•°ä½œä¸ºå·¦å³å­æ ‘
             TreeNode* node = new TreeNode(c);
             node->right = st.top(); st.pop();
             node->left = st.top(); st.pop();
@@ -82,22 +82,22 @@ TreeNode* buildTree(const string& postfix) {
     return st.top();
 }
 
-// »ñÈ¡Ê÷µÄ¸ß¶È
+// è·å–æ ‘çš„é«˜åº¦
 int getHeight(TreeNode* root) {
     if (!root) return 0;
     return max(getHeight(root->left), getHeight(root->right)) + 1;
 }
 
-// ¼ÆËã±í´ïÊ½Öµ
+// è®¡ç®—è¡¨è¾¾å¼å€¼
 int evaluate(TreeNode* root, const map<char, int>& values) {
     if (!root) return 0;
 
     if (isalpha(root->val)) {
-        // Ò¶×Ó½Úµã£º·µ»Ø±äÁ¿Öµ
+        // å¶å­èŠ‚ç‚¹ï¼šè¿”å›å˜é‡å€¼
         return values.at(root->val);
     }
 
-    // ÄÚ²¿½Úµã£ºµİ¹é¼ÆËã×óÓÒ×ÓÊ÷
+    // å†…éƒ¨èŠ‚ç‚¹ï¼šé€’å½’è®¡ç®—å·¦å³å­æ ‘
     int leftVal = evaluate(root->left, values);
     int rightVal = evaluate(root->right, values);
 
@@ -110,7 +110,7 @@ int evaluate(TreeNode* root, const map<char, int>& values) {
     return 0;
 }
 
-// Êä³ö±í´ïÊ½Ê÷
+// è¾“å‡ºè¡¨è¾¾å¼æ ‘
 void printTree(TreeNode* root) {
     if (!root) return;
 
@@ -118,7 +118,7 @@ void printTree(TreeNode* root) {
     int width = (1 << height) - 1; // 2^height - 1
     vector<vector<char>> canvas(2 * height - 1, vector<char>(width, ' '));
 
-    // Ê¹ÓÃDFS²¼¾ÖÊ÷
+    // ä½¿ç”¨DFSå¸ƒå±€æ ‘
     struct NodeInfo {
         TreeNode* node;
         int row, col;
@@ -135,10 +135,10 @@ void printTree(TreeNode* root) {
         int row = current.row;
         int col = current.col;
 
-        // ·ÅÖÃµ±Ç°½Úµã
+        // æ”¾ç½®å½“å‰èŠ‚ç‚¹
         canvas[row][col] = node->val;
 
-        // ¼ÆËã×Ó½ÚµãµÄÎ»ÖÃ
+        // è®¡ç®—å­èŠ‚ç‚¹çš„ä½ç½®
         if (node->left || node->right) {
             int levelGap = (1 << (height - row / 2 - 2));
 
@@ -158,7 +158,7 @@ void printTree(TreeNode* root) {
         }
     }
 
-    // Êä³ö»­²¼£¬È¥³ıĞĞÄ©¿Õ¸ñ
+    // è¾“å‡ºç”»å¸ƒï¼Œå»é™¤è¡Œæœ«ç©ºæ ¼
     for (int i = 0; i < canvas.size(); i++) {
         string line;
         for (int j = canvas[i].size() - 1; j >= 0; j--) {
@@ -175,7 +175,7 @@ int main() {
     string infix;
     int n;
 
-    // ¶ÁÈ¡ÊäÈë
+    // è¯»å–è¾“å…¥
     cin >> infix;
     cin >> n;
 
@@ -187,15 +187,15 @@ int main() {
         values[c] = x;
     }
 
-    // 1. ×ª»»ÎªÄæ²¨À¼Ê½²¢Êä³ö
+    // 1. è½¬æ¢ä¸ºé€†æ³¢å…°å¼å¹¶è¾“å‡º
     string postfix = infixToPostfix(infix);
     cout << postfix << endl;
 
-    // 2. ¹¹½¨±í´ïÊ½Ê÷²¢Êä³ö
+    // 2. æ„å»ºè¡¨è¾¾å¼æ ‘å¹¶è¾“å‡º
     TreeNode* root = buildTree(postfix);
     printTree(root);
 
-    // 3. ¼ÆËã±í´ïÊ½Öµ²¢Êä³ö
+    // 3. è®¡ç®—è¡¨è¾¾å¼å€¼å¹¶è¾“å‡º
     int result = evaluate(root, values);
     cout << result << endl;
 
